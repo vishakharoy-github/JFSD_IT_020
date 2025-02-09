@@ -93,7 +93,7 @@ class OnlineStore implements StoreOperations {
 }
 
 // Main class for user interaction
-public class Main {
+public class online-store-system {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         OnlineStore store = new OnlineStore();
