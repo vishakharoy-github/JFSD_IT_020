@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox</title>
+    <!-- <link rel="stylesheet" href="newsfont.css"> -->
+    <style>
+        /* html {
+    font-size: 140%;
+  } */
+header {
+    margin: 22px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: normal;
+    margin: 0;
+  }
+  h1{
+    text-align: center;
+  }
+  section {
+    display: flex;
+    align-content: space-between;
+    text-align: justify;
+  }
+  article {
+    margin-top: 18px;
+  }
+  #articleid1 {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex-basis: 500px;
+    max-height: 500px;
+    flex-shrink: .2;
+    overflow: hidden;
+    padding-right: 4px;
+    border-right: 1px solid;
+    margin-right: 10px;
+  }
+  #articleid2 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    flex-basis: 1500px;
+    max-height: 1000px;
+    flex-shrink:.3;
+    overflow: hidden;
+    padding-right: 4px;
+    border-top: 1px solid;
+    margin-right: 10px;
+  }
+  #articleid3 {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap; 
+    flex-basis: 550px;
+    max-height: 500px;
+    flex-shrink:.2;
+    overflow: hidden;
+    padding-right: 4px;
+    /* border-top: 1px solid; */
+    margin-right: 10px;
+    align-items: center;
+  }
+body {
+    font-family: sans-serif;
+    background-color: #FFFFFD;
+    margin: 32px;
+  } 
+nav{
+    padding: 8px 0;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    display: flex;
+    justify-content: space-between;
+  }
+div{
+    text-align: center;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>The Safe Newspaper</h1>
+    </header>
+    <nav>
+        <h5>NEWS FOR TODAY</h5>
+        <h5>~</h5>
+        <h5>FRONTEND TECHNOLOGIES</h5>
+        <h5>~</h5>
+        <h5>SPECIAL EDITION</h5>
+    </nav>
+    <section>
+        <article id="articleid1">
+            <h2>HTML: </h2>
+            <p>HTML stands for HyperText Markup Language. It is the standard language used to create and design web pages on the internet. It was introduced by Tim Berners-Lee in 1991 at CERN as a simple markup language. Since then, it has evolved through versions from HTML 2.0 to HTML5 (the latest 2024 version).
+                HTML is a combination of Hypertext and Markup language. Hypertext defines the link between the web pages and Markup language defines the text document within the tag.</p>
+        </article>
+            
+        <article id="articleid1">
+            <h2>CSS: </h2>
+            <p>CSS or Cascading Style Sheets is a stylesheet language used to add styles to the HTML document. It describes how HTML elements should be displayed on the web page.
+
+                CSS was first proposed by Håkon Wium Lie in 1994 and later developed by Lie and Bert Bos, who published the CSS1 specification in 1996.
+                
+                Basic CSS Example
+                CSS has 3 ways to style your HTML:
+                
+                Inline: Add styles directly to HTML elements (limited use).
+                Internal: Put styles inside the HTML file in a style tag.
+                External: Create a separate CSS file (.css) and link it to your HTML.</p>
+               
+        </article>
+
+        <article id="articleid3">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRELunlkyFk5TtyF76yEpHkyvGPOfaDGIXK-A&s" width="530px" height="350px">
+
+        </article>       -->
+
+    </section>
+    <section>       
+            <article id="articleid2">
+            <h2>JavaScript: </h2>
+            <p>JavaScript is a lightweight, cross-platform, single-threaded, and interpreted compiled programming language. It is also known as the scripting language for webpages. It is well-known for the development of web pages, and many non-browser environments also use it.
+
+                JavaScript is a weakly typed language (dynamically typed). JavaScript can be used for Client-side developments as well as Server-side developments. JavaScript is both an imperative and declarative type of language. JavaScript contains a standard library of objects, like Array, Date, and Math, and a core set of language elements like operators, control structures, and statements. 
+                
+                Example: This example shows the alert by the use of alert method provided by JavaScript.
+            </p>
+            </article>
+    </section>
+
+   
+</body>
+</html>
