@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prevent Form Submission</title>
+</head>
+<style>
+   body{
+    margin: 10px;
+    background-color: rgb(238, 66, 132);
+    text-align: center;
+   }
+   .class1 {
+            max-width: 500px;
+            margin: 0 auto;
+            margin-top: 250px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+        
+        }
+        button{
+            margin-top: 20px;
+        }
+        button:hover{
+            background-color: rgb(255, 242, 0);
+        }
+</style>
+<body>
+    <div class="class1">
+    <form id="myForm">
+        <label for="name">Full Name</label> <br/>
+        <input type="text" name="name" placeholder="Enter your name" style="text-align: center;" required>
+        <br/>
+        <label for="email">Email</label> <br/>
+        <input type="email" email="name" placeholder="Enter your email"style="text-align: center;" required>
+        <br/>
+        <button type="submit"">Submit</button><br/>
+    </form>
+</div>
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Form submission prevented!');
+        });
+    </script>
+</body>
+</html>
