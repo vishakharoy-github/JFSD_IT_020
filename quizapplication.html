@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Application</title>
+  <style>
+    /* styles.css */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url("quiz.webp");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .quiz-container {
+      background: rgb(5, 29, 116);
+      padding: 20px;
+      border-radius: 50px;
+      box-shadow: 0 10px 50px whitesmoke;
+      text-align: center;
+      width: 300px;
+      border: 5px solid #f08b8b;
+      
+    }
+
+    h1 {
+      color: goldenrod;
+    }
+
+    .question {
+      margin: 20px 0;
+      font-size: 18px;
+      font-weight: bold;
+      color: wheat;
+    }
+
+    .options {
+      list-style: none;
+      padding: 0;
+    }
+
+    .options li {
+      margin-bottom: 10px;
+    }
+
+    .option-btn {
+      padding: 10px;
+      width: 100%;
+      border: 5px solid goldenrod;
+      border-radius: 4px;
+      background-color: white;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .option-btn:hover {
+      background-color: #efaec6;
+      border: 5px solid rgb(243, 242, 239);
+      transform: scale(0.5); 
+    }
+
+    .selected {
+      background-color: #ff9800;
+      border: #ff9800;
+      transform: scale(1.25);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .nav-buttons button {
+      padding: 10px;
+      background-color: rgb(229, 68, 98);
+      font-weight: bolder;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: 0 7px 7px whitesmoke;
+    }
+
+    .nav-buttons button:hover {
+      background-color: white;
+      color:#ff0000;
+      box-shadow: 0 7px 7px #ff0000;
+    }
+
+    #result {
+      font-size: 20px;
+      color: #f08b8b;
+      font-weight: bolder;
+    }
+
+    #timer {
+      font-size: 18px;
+      margin-top: 10px;
+      color: #ff0000;
+    }
+    #next{
+        margin-left: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Quiz Application</h1>
+    <div id="quiz">
+      <div class="question">Question</div>
+      <ul class="options">
+        <li><button class="option-btn">Option 1</button></li>
+        <li><button class="option-btn">Option 2</button></li>
+        <li><button class="option-btn">Option 3</button></li>
+        <li><button class="option-btn">Option 4</button></li>
+      </ul>
+    </div>
+    <div id="timer">Time left: 10s</div>
+    <div class="nav-buttons">
+      <button id="prev" class="hidden">Previous</button>
+      <button id="next">Next</button>
+    </div>
+    <div id="result" class="hidden">Your Score: <span id="score">0</span></div>
+  </div>
+  <script>
+    const quizData = [
+      {
+        question: "Which language came first?",
+        options: ["Java", "C", "Python", "C++"],
+        correct: 1,
+      },
+      {
+        question: "What is the correct way to find the length of the string [str = Hello World]in JavaScript?",
+        options: ["length(str);","str.length();","str.length;","str.len;"],
+        correct: 2,
+      },
+      {
+        question: "What does HTML stand for?",
+        options: [
+          "HyperText Markup Language",
+          "Home Tool Markup Language",
+          "HyperLinks Text Markup Language",
+          "HyperLink and Text Markup Language",
+        ],
+        correct: 0,
+      },
+      {
+        question: "Which CSS property is used to apply a background image to an element?",
+        options: ["background-img","bg-image","background-image","image-background"],
+        correct: 2,
+      },
+      {
+        question: "Which event listener should be used to detect when a user selects an answer in a quiz?",
+        options: ["onchange","onclick","onhover","onload"],
+        correct: 1,
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let selectedAnswer = null;
+    let timeLeft = 10;
+    let timer;
+
+    const questionEl = document.querySelector(".question");
+    const optionBtns = document.querySelectorAll(".option-btn");
+    const prevBtn = document.getElementById("prev");
+    const nextBtn = document.getElementById("next");
+    const resultEl = document.getElementById("result");
+    const scoreEl = document.getElementById("score");
+    const timerEl = document.getElementById("timer");
+
+    function loadQuestion() {
+      const currentQuiz = quizData[currentQuestion];
+      questionEl.textContent = currentQuiz.question;
+
+      optionBtns.forEach((btn, index) => {
+        btn.textContent = currentQuiz.options[index];
+        btn.classList.remove("selected");
+        if (selectedAnswer === index) {
+          btn.classList.add("selected");
+        }
+        btn.onclick = () => {
+          selectAnswer(index);
+        };
+      });
+
+      prevBtn.classList.toggle("hidden", currentQuestion === 0);
+      nextBtn.textContent =
+        currentQuestion === quizData.length - 1 ? "Submit" : "Next";
+
+      startTimer();
+    }
+
+    function startTimer() {
+      timeLeft = 10;
+      timerEl.textContent = `Time left: ${timeLeft}s`;
+
+      clearInterval(timer);
+      timer = setInterval(() => {
+        timeLeft--;
+        timerEl.textContent = `Time left: ${timeLeft}s`;
+
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          nextBtn.click(); // Automatically move to the next question.
+        }
+      }, 1000);
+    }
+
+    function selectAnswer(index) {
+      selectedAnswer = index;
+      optionBtns.forEach((btn, i) => {
+        btn.classList.toggle("selected", i === index);
+      });
+    }
+
+    function showResult() {
+      resultEl.classList.remove("hidden");
+      scoreEl.textContent = score;
+      document.getElementById("quiz").classList.add("hidden");
+      prevBtn.classList.add("hidden");
+      nextBtn.classList.add("hidden");
+      timerEl.classList.add("hidden");
+      clearInterval(timer);
+    }
+
+    nextBtn.addEventListener("click", () => {
+      if (selectedAnswer === quizData[currentQuestion].correct) {
+        score++;
+      }
+      selectedAnswer = null;
+      if (currentQuestion === quizData.length - 1) {
+        showResult();
+      } else {
+        currentQuestion++;
+        loadQuestion();
+      }
+    });
+
+    prevBtn.addEventListener("click", () => {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        loadQuestion();
+      }
+    });
+
+    loadQuestion();
+  </script>
+</body>
+</html>
